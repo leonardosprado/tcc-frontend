@@ -1,0 +1,15 @@
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+.footer {
+    background:rgb(224, 224, 224) ;
+    color:rgb(94, 94, 94);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+}
