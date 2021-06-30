@@ -17,7 +17,7 @@ export const Container = styled.div`
         align-items: center;
         height: 100%;
 
-        border: thin solid rgb(228, 228, 228) ;
+        /* border: thin solid rgb(228, 228, 228) ; */
         position: relative;
     }
     .main-content::before{
@@ -36,6 +36,7 @@ export const ContainerInt = styled.div`
   margin:15px;
   width: 100%;
   height: 100%;
+  border-radius:8px;
   height: 600px;
   display:flex;
   flex-direction:row;
@@ -43,6 +44,7 @@ export const ContainerInt = styled.div`
   align-items:center;
 
   background-color:#f7f7f7;
+  
   box-shadow: 0 0 34px 1px #95959570;
 
   @media(max-width:800px){
@@ -72,6 +74,8 @@ export const Content = styled.div`
     form{
         display:flex;
         flex-direction:column;
+        width:100%;
+        padding:0px 50px;
     }
     form input{
         margin:9px;
@@ -79,6 +83,8 @@ export const Content = styled.div`
         padding:20px;
         border:thin solid #efefef;
         transition: all 0.5s ease-in;
+
+        border-radius: 8px;
     }
     form input:focus{
         outline:none;
@@ -86,11 +92,11 @@ export const Content = styled.div`
         border:thin solid #efefef;
     }
     form .buttonSecodary{
-        background-color: #4141ff;
+        background-color: #001868;
         border:none;
         text-align:center;
-        padding: 5px 40px;
-        /* border-radius: 50px; */
+        padding: 10px 40px;
+        border-radius: 8px;
         font-weight:600;
         color:#fff;
         text-decoration:none;
@@ -99,7 +105,7 @@ export const Content = styled.div`
         margin:9px;
         display:flex;
         align-items:center;
-        justify-content:space-between;
+        justify-content:center;
         cursor:pointer;
     }
     form .buttonSecodary:hover{
@@ -112,10 +118,15 @@ export const Content = styled.div`
         border:none;
         outline: none;
     }
+    form span{
+        text-align:center;
+        color:#001868;
+    }
    
 
     @media(max-width:800px){
         width:100%;
+     
     }
 
 `
@@ -153,23 +164,23 @@ export const HeaderInt = styled.div`
     color:#fff;
     @media(max-width:800px){
       padding: 10px;
-       flex-direction:column;
+       /* flex-direction:column; */
    }
 `
 
 export const Button = styled.a`
-    background-color: #4141ff;
+    background-color: #001868;
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight:600;
     color:#fff;
     text-decoration:none;
-    transition: all 0.4s ease-in;
+    transition: all 0.1s ease-in;
     display:block;
 
 
     &:hover{
-        background-color: #1d1df9;
+        background-color: #00FFE5;
     }
     
 `;
@@ -192,9 +203,10 @@ export const ButtonSecodary = styled.a`
     }
     
 `;
-export const Logo = styled.h2`
-    color:#fff;
-    font-style:italic;
-    font-weight:900;
+export const Logo = styled.div`
+    img{
+        height:40px;
+        object-fit:contain;
+    }
 
 `;

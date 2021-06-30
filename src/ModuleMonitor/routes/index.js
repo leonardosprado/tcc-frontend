@@ -7,6 +7,7 @@ import Main from '../pages/Main';
 import Login from '../pages/Login';
 // import { Container } from './styles';
 import Route from './Route';
+import { PrivateRoute } from './PrivateRoute';
 
 function RoutesMonitor() {
   let match = useRouteMatch();
@@ -14,7 +15,7 @@ function RoutesMonitor() {
   return (
       <Switch>
           <Route path={`${match.path}/login`}  component={Login} />
-          <Route path='/monitor' component={Main} isPrivate />
+          <PrivateRoute path='/monitor' component={Main} />
       </Switch>
   );
 }

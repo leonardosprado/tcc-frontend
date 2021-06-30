@@ -1,0 +1,11 @@
+.logoff{
+    /* margin: 10px; */
+    border: none;
+    padding: 0px 20px;
+    transition: all 0.3s ease-in;
+}
+
+.logoff:hover{
+    background-color:#001868 ;
+    color: #fff;
+}

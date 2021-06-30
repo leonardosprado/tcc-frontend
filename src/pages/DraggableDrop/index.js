@@ -39,13 +39,17 @@ export default class DraggableDrop extends Component {
 
         bouding:null,
 
+
+        posicaoAtual:null,
+
       };
 
       
       componentDidMount(){
         this.positionBoudingAtt(); 
         this.props.positionAttComplete();
-
+        this.setState({posicaoAtual:this.myItem.current.getBoundingClientRect()})
+        // console.log(this.myItem.current.getBoundingClientRect())
       }
 
       positionBoudingAtt(){
@@ -75,7 +79,7 @@ export default class DraggableDrop extends Component {
       }
     
       handleMouseDown = ({ clientX, clientY }) => {
-       
+    
         window.addEventListener('mousemove', this.handleMouseMove);
         window.addEventListener('mouseup', this.handleMouseUp);
 
@@ -94,6 +98,7 @@ export default class DraggableDrop extends Component {
       };
     
       handleMouseMove = ({ clientX, clientY }) => {
+     
         const { isDragging } = this.state;
         const { onDrag } = this.props;
     
@@ -116,7 +121,8 @@ export default class DraggableDrop extends Component {
       };
     
       handleMouseUp = () => {
-        this.props.onDrop();
+        this.props.onDrop(this.props.texto);
+       
         window.removeEventListener('mousemove', this.handleMouseMove);
         window.removeEventListener('mouseup', this.handleMouseUp);
         window.removeEventListener('touchmove', this.handleMouseMove);
@@ -139,10 +145,13 @@ export default class DraggableDrop extends Component {
              
             }
             if((bouding.top > this.props.myBoxTop && bouding.bottom < this.props.myBoxBottom) && (bouding.left > this.props.myBoxLeft && bouding.right < this.props.myBoxRight)  ){
+             
+              this.props.statusStack(this.props.id,true,this.props.texto );
               this.setState({boxEnter:true});
-       
             }
             else{
+
+              this.props.statusStack(this.props.id,false,this.props.texto);
               this.setState({boxEnter:false});
              
             }
@@ -150,6 +159,8 @@ export default class DraggableDrop extends Component {
 
           }
         );
+
+       
       };
     
       render() {
@@ -158,50 +169,67 @@ export default class DraggableDrop extends Component {
     
         return (
         <>
-          <Container
-            onMouseDown={this.handleMouseDown}
-            onTouchStart={this.handleMouseDown}
-            x={translateX}
-            y={translateY}
-            isDragging={isDragging}
-          >
-           
-              <Texto
-              ref={this.myItem}
-              >{this.props.texto}</Texto>
-              {/* <p>{this.props.id}</p> */}
-              {/* <p>{`${translateX} x ${translateY}`}</p> */}
-              {/* <p>{`${this.state.myItemTop} x ${this.state.myItemBottom}`}</p>
-              <p>{`${this.state.myItemLeft} x ${this.state.myItemRight}`}</p> */}
-              {/* <p>{`${this.props.myBoxTop} x ${this.props.myBoxBottom}`}</p> */}
-              {/* <p>{`${this.state.myItemLeft} x ${this.state.myItemRight}`}</p> */}
-              {/* <p>{this.props.boxComplete}</p> */}
-          
-            
-          </Container>
-          {/* <div>
-            {this.state.isDragging?
-              <div style={{width:'20px',  height:'20px', background:"#ff0000"}} ></div>: <div style={{width:'20px',  height:'20px', background:"#00ff00"}}></div>
-            }
-          </div> */}
-          <div>
-          {
-            this.state.boxEnter?
-              <div style={{width:'20px',  height:'20px', background:"#0000ff"}} ></div>: <div style={{width:'20px',  height:'20px', background:"#00ff00"}}></div>
-            }
-          </div>
-          </>
+        {this.props.draggableoff?
+        <Container
+          onClick={()=>this.props.statusStack(this.props.id,false,this.props.texto )}
+          onMouseDown={this.handleMouseDown}
+          onTouchStart={this.handleMouseDown}
+          x={translateX}
+          y={translateY}
+          isDragging={isDragging}
+        >
+       
+          <Texto ref={this.myItem}>{this.props.texto}</Texto>
+        </Container>
+      
+        :
+        <Container
+        onClick={()=>this.props.statusStack(this.props.id,true,this.props.texto )}
+        onMouseDown={this.handleMouseDown}
+        onTouchStart={this.handleMouseDown}
+        x={translateX}
+        y={translateY}
+        isDragging={isDragging}
+        >
+       
+          <Texto
+          ref={this.myItem}
+          >{this.props.texto}</Texto>
+          {/* <p>{this.props.id}</p> */}
+          {/* <p>{`${translateX} x ${translateY}`}</p> */}
+          {/* <p style={{position:'absolute'}}>{`${this.state.myItemTop} x ${this.state.myItemBottom}`}</p> */}
+          {/* <p>{`${this.state.myItemLeft} x ${this.state.myItemRight}`}</p> */}
+          {/* <p>{`${this.props.myBoxTop} x ${this.props.myBoxBottom}`}</p> */}
+          {/* <p>{`${this.state.myItemLeft} x ${this.state.myItemRight}`}</p> */}
+          {/* <p>{this.props.boxComplete}</p> */}
+      
+        
+      </Container>
+      }
+      {/* <div>
+        {this.state.isDragging?
+          <div style={{width:'20px',  height:'20px', background:"#ff0000"}} ></div>: <div style={{width:'20px',  height:'20px', background:"#00ff00"}}></div>
+        }
+      </div> */}
+      {/* <div>
+      {
+        this.state.boxEnter?
+          <div style={{width:'20px',  height:'20px', background:"#ff00ff"}} ></div>: <div style={{width:'20px',  height:'20px', background:"#00ff00"}}></div>
+        }
+      </div> */}
+
+        
+        </>
         );
       }
     }
     
     const Container = styled.div`
-    
       transform: translate(${props=> props.x}px,${props=> props.y}px);
       cursor: grab;
       background:transparent; 
       user-select: none;
-      font-size:3rem;
+      /* font-size:3rem; */
       margin:0rem;
       /* width:50px; */
       transition: transform .1s ease;
@@ -217,4 +245,5 @@ export default class DraggableDrop extends Component {
         cursor: grabbing;
         
       `};
+      
     `;

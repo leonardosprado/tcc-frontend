@@ -4,6 +4,12 @@ export const Texto = styled.div`
     
     font-family: 'Dancing Script', cursive;
     font-size:5rem;
+    
+    @media(max-width:768px){
+        font-size:75px;
+        max-width:100%;
+    }
+
   
 `;
 

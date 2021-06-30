@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, ContainerInt, Content, Header, HeaderInt, Logo } from '../../../pages/Main/styles';
 
 import ImageLetramento from '../../../assets/img/teacher-board.png';
+import LogoImg from '../../../assets/img/logo.png';
 import Arrow from '../../../assets/img/redo.svg';
 
-import AuthService from '../../services/auth-service';
+import AuthService from '../../services/auth.service';
 
 
 // import { Container } from './styles';
@@ -18,6 +19,11 @@ function Login({history}) {
     const[loading,setLoading] = useState(false);
 
     const[message,setMessage] = useState('');
+
+    useEffect(() => {
+        // document.title = "Login Monitor"
+    }, [])
+      
 
     function handleLogin(e){
         e.preventDefault();
@@ -41,7 +47,10 @@ function Login({history}) {
     <div class="main">
         <Header>
             <HeaderInt>
-                <Logo>Apoio ao Letramento</Logo>
+                <Logo>   
+                    <img src={LogoImg} alt="Logo" />
+
+                </Logo>
                 <Link to="/" style={{'textDecoration':'none'}}>
                 
                     <Button>Entrar como Aprendiz</Button>
@@ -55,14 +64,14 @@ function Login({history}) {
                 </Content>
                 <Content>
                     <div className="main-content">
-                        <h3 style={{'color':'#656565','fontWeight':'100'}}>Bem vindo Monitor</h3>
-                        <h1 style={{'color':'#303030','fontWeight':'100'}} >Olá, vamos começar ?</h1>
+                        <h3 style={{'color':'#001868','fontWeight':'100'}}>Bem vindo Monitor</h3>
+                        <h1 style={{'color':'#001868','fontWeight':'100'}} >Olá, vamos começar ?</h1>
                         <form className="form-login-aprendiz" onSubmit={handleLogin}>
                                 <input type="text" onChange={(e)=> setUsername(e.target.value) } value={username} name="email" placeholder="Seu usuário" required />
                                 <input type="password" onChange={(e)=> setPassword(e.target.value) } value={password} name="password" placeholder="Sua senha" required />
-                                <button class="buttonSecodary" type="submit">Entrar   <img src={Arrow} height="25px" style={{'padding':10}} /></button>
+                                <button  class="buttonSecodary" type="submit">Entrar   <img src={Arrow} height="25px" style={{'marginLeft':5}} /></button>
 
-                                <span>{loading?'Entrando':''}</span>
+                                <span>{loading?'Entrando':'...'}</span>
                                 <span>{message}</span>
                         </form>
                         {/* <Link to="/aprendiz" style={{'display':'flex','flexDirection':'column','textDecoration':'none'}}>

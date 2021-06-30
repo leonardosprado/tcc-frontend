@@ -13,7 +13,7 @@ function Page404({history}) {
     });
   return(
       <div>
-          <h1>Redirect to page Home</h1>
+          <h1>404 - Redirect to page Home</h1>
       </div>
   );
 }
