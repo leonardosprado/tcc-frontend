@@ -29,6 +29,7 @@ export default class Home extends Component {
       id_atividade:'',
       atividade:[],
       palavraVet:[],
+      questao:'',
       palavra:'',
       figura:'',
       id_atividade_programada:'',
@@ -177,6 +178,7 @@ export default class Home extends Component {
       this.setState({id_atividade:data.atividade.id_atividade})
       this.setState({palavraIsCorrect:data.atividade.palavra.toLowerCase()})
       this.setState({palavra:data.atividade.sugestao_resposta.toLowerCase()});
+      this.setState({questao:data.atividade.questao});
       this.setState({figura:`${URL_API}${data.atividade.url_img}`});
       this.setState({atividade:data});
       this.setState({requicaoComplete:true})
@@ -413,22 +415,31 @@ export default class Home extends Component {
           {/* <h4>{this.state.timer} - {this.state.palavraFinal}</h4> */}
           <Row className="linha-do-topo">
             <Row className="not-responsive">
+             
               <Gif>
                 <img draggable="false" src={`${this.state.emoji}`} alt="figura"/>
               </Gif>
-              <Figura>
+              <Figura className="d-flex flex-column ">
+                <div className="py-2">
+                  <h2 className="display-5">
+                    {this.state.questao}
+                  </h2>
+                </div>
                 <img draggable="false" src={`${this.state.figura}`} alt="figura"/>
               </Figura>
+              
               <Save onClick={()=>{this.createAtividade(); setTimeout(() => {this.setState({ onEncerrar: true })},500);}}>
                 <span>Concluir</span>
             
 
               </Save>
+              
             </Row>
             <Wip className='wip'
               onDragOver={(e)=>this.onDragOver(e)} 
               onDrop={(e)=>this.onDrop(e, "wip")}  
             >
+                
                 {tasks.wip}
             </Wip>
            

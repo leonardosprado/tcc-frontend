@@ -28,7 +28,7 @@ class Atividades {
       });
   }
 
-  async createAtividade(file,sugestao_resposta,nivel,palavra,file_name){
+  async createAtividade(file,questao,sugestao_resposta,nivel,palavra,file_name){
     try{
       axiosConfig = {
         headers: {
@@ -38,6 +38,7 @@ class Atividades {
         }
       };
       const formdata = new FormData();
+      formdata.append('questao',questao);
       formdata.append('palavra',palavra);
       formdata.append('nivel',nivel);
       formdata.append('sugestao_resposta',sugestao_resposta);

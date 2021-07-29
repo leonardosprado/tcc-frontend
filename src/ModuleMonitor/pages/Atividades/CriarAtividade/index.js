@@ -7,6 +7,7 @@ import { Container } from '../styles'
 export default function PageCriarAtividade() {
 
 
+    const [questao, setQuestao] = useState(null);
     const [palavra, setPalavra] = useState(null);
     const [nivel, setNivel] = useState(null);
     const [sugestao, setSugestao] = useState(null);
@@ -21,7 +22,7 @@ export default function PageCriarAtividade() {
         try{
             setisLoaded(true);
             if(palavra && nivel && sugestao && file){
-                var data = await atividadeServico.createAtividade(file, sugestao,nivel,palavra,fileName);
+                var data = await atividadeServico.createAtividade(file, questao,sugestao,nivel,palavra,fileName);
                 // console.log(data.data.message);
                 setSucess(data.data.message||'');
                 setisLoaded(false);
@@ -29,6 +30,9 @@ export default function PageCriarAtividade() {
             }
             else{
                 setisLoaded(false);
+                if(!questao){
+                    throw("Insere uma Questão");
+                }
                 if(!palavra){
                     throw("Insere uma Palavra");
                 }
@@ -65,6 +69,7 @@ export default function PageCriarAtividade() {
 
              <form>
                  <div >
+                    <input type="text" placeholder="Questão" value={questao ||''} onChange={(e)=>(setQuestao(e.target.value))} />
                     <input type="text" placeholder="Palavra" value={palavra ||''} onChange={(e)=>(setPalavra(e.target.value))} />
                     <input type="number" placeholder="nivel" value={nivel ||''} onChange={(e)=>(setNivel(e.target.value))} />
                  </div>
